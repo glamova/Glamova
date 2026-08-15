@@ -5,5 +5,19 @@
     "heroAccent": "Votre signature",
     "heroText": "Pièces tendance et féminines, sélectionnées pour révéler votre style au quotidien."
   },
-  "products": []
+  "products": [
+    {
+      "price": 18,
+      "name": "Sacs ",
+      "featured": true,
+      "sizes": [
+        "Taille unique "
+      ],
+      "stripePriceId": "price_1U4aSg4Y8Uf9F3mtObns48cg",
+      "id": "Sac-Alma",
+      "image": "/uploads/ec5c7a15-bbe1-4d9d-a564-deffe0130830.png",
+      "description": "Sac à main structuré au design élégant, doté d’une poignée et d’une bandoulière amovible pour un porté main ou épaule. Son fermoir doré et sa finition texturée apportent une touche chic à toutes vos tenues. ",
+      "category": "Sacs"
+    }
+  ]
 }
