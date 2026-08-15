@@ -1,0 +1,64 @@
+name: Rendre les categories cliquables v4
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/glamova-categories-v4.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  correction:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installer de vrais liens
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          app = Path("assets/app.js")
+          code = app.read_text()
+          tick = chr(96)
+
+          fetch_end = "  catch(e){console.error(e);state.products=[]}"
+          url_filter = "  const requested=new URLSearchParams(location.search).get('category');if(requested)state.filter=requested;"
+          if url_filter not in code:
+              code = code.replace(fetch_end, fetch_end + "\n" + url_filter)
+
+          old_menu = "  $('#menu-categories').innerHTML=categories.map(c=>" + tick + '<button data-category="' + '${c.name}' + '">' + '${c.name}' + "</button>" + tick + ").join('');"
+          new_menu = "  $('#menu-categories').innerHTML=categories.map(c=>" + tick + '<a href="?category=' + '${encodeURIComponent(c.name)}' + '#nouveautes">' + '${c.name}' + "</a>" + tick + ").join('');"
+          code = code.replace(old_menu, new_menu)
+
+          direct = "  $$('#menu-categories [data-category]').forEach(button=>{button.onclick=e=>{e.preventDefault();e.stopPropagation();selectCategory(button.dataset.category)}});"
+          code = code.replace("\n" + direct, "")
+          app.write_text(code)
+
+          styles = Path("assets/styles.css")
+          css = styles.read_text()
+          css = css.replace(".menu-categories button{", ".menu-categories button,.menu-categories a{")
+          css = css.replace("cursor:pointer}.drawer-tools", "cursor:pointer;display:block}.drawer-tools")
+          styles.write_text(css)
+
+          page = Path("index.html")
+          html = page.read_text()
+          html = html.replace('assets/styles.css">', 'assets/styles.css?v=4">')
+          html = html.replace('assets/app.js?v=3"></script>', 'assets/app.js?v=4"></script>')
+          html = html.replace('assets/app.js"></script>', 'assets/app.js?v=4"></script>')
+          page.write_text(html)
+          PY
+
+      - name: Verifier JavaScript
+        run: node --check assets/app.js
+
+      - name: Enregistrer
+        run: |
+          git config user.name "Glamova Bot"
+          git config user.email "actions@github.com"
+          git add assets/app.js assets/styles.css index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Utiliser des liens fiables pour les categories"
+          git push
