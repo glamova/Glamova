@@ -1,0 +1,72 @@
+name: Corriger definitivement les categories v5
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/glamova-categories-v5.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  correction:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Corriger les liens des categories
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          app = Path("assets/app.js")
+          code = app.read_text()
+
+          # Répare l'erreur de syntaxe laissée par l'ancienne correction.
+          code = code.replace(
+              "if(cat)selectCategory(cat.dataset.category)const size",
+              "if(cat)selectCategory(cat.dataset.category);const size"
+          )
+
+          # Le filtre peut aussi être choisi directement dans l'adresse.
+          marker = "  catch(e){console.error(e);state.products=[]}"
+          query_filter = "  const requested=new URLSearchParams(location.search).get('category');if(requested)state.filter=requested;"
+          if query_filter not in code:
+              code = code.replace(marker, marker + "\n" + query_filter)
+
+          # Remplace les boutons fragiles du menu par de vrais liens Safari.
+          start = "  $('#menu-categories').innerHTML=categories.map(c=>"
+          lines = code.splitlines()
+          for index, line in enumerate(lines):
+              if line.startswith(start):
+                  lines[index] = "  $('#menu-categories').innerHTML=categories.map(c=>`<a href=\"?category=${encodeURIComponent(c.name)}#nouveautes\">${c.name}</a>`).join('');"
+          code = "\n".join(lines) + ("\n" if code.endswith("\n") else "")
+          app.write_text(code)
+
+          styles = Path("assets/styles.css")
+          css = styles.read_text()
+          css = css.replace(".menu-categories button{", ".menu-categories button,.menu-categories a{")
+          if ".menu-categories a{" not in css:
+              css += "\n.menu-categories a{display:block;color:inherit;text-decoration:none;cursor:pointer}\n"
+          styles.write_text(css)
+
+          page = Path("index.html")
+          html = page.read_text()
+          import re
+          html = re.sub(r'assets/styles\.css(?:\?v=\d+)?', 'assets/styles.css?v=5', html)
+          html = re.sub(r'assets/app\.js(?:\?v=\d+)?', 'assets/app.js?v=5', html)
+          page.write_text(html)
+          PY
+
+      - name: Verifier JavaScript
+        run: node --check assets/app.js
+
+      - name: Enregistrer la correction
+        run: |
+          git config user.name "Glamova Bot"
+          git config user.email "actions@github.com"
+          git add assets/app.js assets/styles.css index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Corriger definitivement les liens de categories"
+          git push
