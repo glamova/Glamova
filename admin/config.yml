@@ -1,0 +1,45 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+media_folder: "uploads"
+public_folder: "/uploads"
+locale: "fr"
+
+collections:
+  - name: "catalogue"
+    label: "Boutique Glamova"
+    files:
+      - name: "products"
+        label: "Produits et réglages"
+        file: "content/products.json"
+        format: "json"
+        fields:
+          - label: "Réglages"
+            name: "settings"
+            widget: "object"
+            fields:
+              - {label: "Lien Instagram", name: "instagram", widget: "string", required: false}
+              - {label: "Lien TikTok", name: "tiktok", widget: "string", required: false}
+              - {label: "Numéro WhatsApp (ex. 33612345678)", name: "whatsapp", widget: "string", required: false}
+              - {label: "Photo principale", name: "heroImage", widget: "image", required: false}
+              - {label: "Photo éditoriale", name: "editorialImage", widget: "image", required: false}
+              - {label: "Petit titre d'accueil", name: "heroEyebrow", widget: "string", default: "NOUVELLE COLLECTION"}
+              - {label: "Titre principal d'accueil", name: "heroTitle", widget: "string", default: "L’allure,"}
+              - {label: "Texte rouge d'accueil", name: "heroAccent", widget: "string", default: "sans effort."}
+              - {label: "Description d'accueil", name: "heroText", widget: "text", default: "Des pièces tendance et féminines, choisies pour sublimer toutes vos journées."}
+          - label: "Produits"
+            name: "products"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.price}} €"
+            fields:
+              - {label: "Identifiant unique (sans espaces)", name: "id", widget: "string"}
+              - {label: "Nom", name: "name", widget: "string"}
+              - {label: "Catégorie", name: "category", widget: "select", options: ["Robes", "Pantalons", "Ensembles", "Hauts", "Vestes", "Blazers", "Manteaux", "Bijoux", "Chaussures", "Sacs"]}
+              - {label: "Prix en euros", name: "price", widget: "number", value_type: "float", min: 0}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Tailles", name: "sizes", widget: "list", field: {label: "Taille", name: "size", widget: "string"}}
+              - {label: "Photo", name: "image", widget: "image", required: false}
+              - {label: "Afficher Nouveau", name: "featured", widget: "boolean", default: true}
+              - {label: "Identifiant du prix Stripe (price_...)", name: "stripePriceId", widget: "string", required: false, hint: "À copier depuis votre tableau de bord Stripe pour activer le paiement."}

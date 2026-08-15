@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Glamova — vêtements tendance pour révéler votre allure.">
+  <title>Glamova — La mode qui vous ressemble</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italiana&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+  <div class="announcement">Livraison offerte dès 80 € d’achat en France métropolitaine</div>
+  <header class="header header-overlay">
+    <button class="icon-button menu-button" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+    <a class="brand" href="#top" aria-label="Glamova, accueil">GLAMOVA<span>PARIS</span></a>
+    <div class="header-actions">
+      <button class="icon-button account-button" aria-label="Mon compte">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20c.5-4.3 2.7-6.5 6.5-6.5s6 2.2 6.5 6.5"></path></svg>
+      </button>
+      <button class="icon-button search-button" aria-label="Rechercher">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+      </button>
+      <button class="cart-button" aria-label="Ouvrir le panier">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.5h10.9L21 7H6"></path><circle cx="9" cy="19" r="1"></circle><circle cx="18" cy="19" r="1"></circle></svg>
+        <span class="cart-count">0</span>
+      </button>
+    </div>
+  </header>
+
+  <aside class="mobile-menu" aria-hidden="true">
+    <button class="close-menu" aria-label="Fermer">×</button>
+    <nav class="drawer-nav" aria-label="Menu principal">
+      <a href="#top">Accueil</a>
+      <a href="#nouveautes">Tous les produits</a>
+      <a href="#nouveautes">Promo</a>
+      <button class="categories-toggle" aria-expanded="false">Les catégories <span>⌄</span></button>
+      <div class="menu-categories" id="menu-categories"></div>
+      <a href="#histoire">La collection Glamova</a>
+    </nav>
+    <div class="drawer-tools"><a href="/.netlify/identity/login">S’identifier</a><button class="drawer-search">Chercher</button></div>
+  </aside>
+  <div class="overlay menu-overlay"></div>
+
+  <main id="top">
+    <section class="hero media-placeholder">
+      <div class="hero-placeholder"><span>Votre photo principale</span><small>À ajouter depuis le Studio Glamova</small></div>
+      <div class="hero-copy">
+        <p class="eyebrow" id="hero-eyebrow">NOUVELLE COLLECTION</p>
+        <h1><span id="hero-title">L’allure,</span> <em id="hero-accent">sans effort.</em></h1>
+        <p class="hero-text" id="hero-text">Des pièces tendance et féminines, choisies pour sublimer toutes vos journées.</p>
+        <a class="primary-button" href="#boutique">Découvrir <span>→</span></a>
+      </div>
+      <a class="hero-scroll" href="#boutique" aria-label="Voir les catégories">↓</a>
+    </section>
+
+    <section class="marquee" aria-label="Les valeurs Glamova">
+      <div>PIÈCES TENDANCE <span>✦</span> LIVRAISON OFFERTE DÈS 80 € <span>✦</span> PAIEMENT SÉCURISÉ <span>✦</span> PIÈCES TENDANCE <span>✦</span></div>
+    </section>
+
+    <section class="section categories" id="boutique">
+      <div class="section-heading">
+        <div><p class="eyebrow">À CHACUNE SON STYLE</p><h2>Shoppez par catégorie</h2></div>
+        <p>Composez votre vestiaire au gré de vos envies.</p>
+      </div>
+      <div class="category-grid" id="category-grid"></div>
+    </section>
+
+    <section class="section products-section" id="nouveautes">
+      <div class="section-heading products-heading">
+        <div><p class="eyebrow">JUSTE ARRIVÉ</p><h2>Les nouveautés</h2></div>
+        <div class="filters" id="filters" aria-label="Filtrer les produits"></div>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+      <div class="empty-state" id="empty-state" hidden>
+        <span>✦</span><h3>La collection arrive bientôt</h3><p>Ajoutez vos premières pièces dans le Studio Glamova.</p>
+      </div>
+    </section>
+
+    <section class="editorial" id="histoire">
+      <div class="editorial-image media-placeholder"><div><span>Votre photo éditoriale</span><small>Portrait, look ou détail</small></div></div>
+      <div class="editorial-copy">
+        <p class="eyebrow">L’ESPRIT GLAMOVA</p>
+        <h2>Révélez la femme<br>que vous êtes.</h2>
+        <p>Glamova imagine un vestiaire actuel, féminin et affirmé. Des essentiels bien coupés aux pièces fortes, chaque sélection est pensée pour vous donner confiance.</p>
+        <a href="#boutique" class="text-link">Voir toute la collection <span>→</span></a>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <article><span>◇</span><h3>Livraison offerte</h3><p>Dès 80 € en France métropolitaine</p></article>
+      <article><span>↺</span><h3>Retours sous 14 jours</h3><p>Une hésitation ? Vous pouvez changer d’avis</p></article>
+      <article><span>⌁</span><h3>Paiement sécurisé</h3><p>Carte bancaire via Stripe</p></article>
+      <article><span>♡</span><h3>Besoin d’aide ?</h3><p>Écrivez-nous directement sur WhatsApp</p></article>
+    </section>
+
+    <section class="newsletter">
+      <p class="eyebrow">LE CERCLE GLAMOVA</p><h2>Un peu de style<br>dans votre boîte mail.</h2>
+      <p>Inscrivez-vous pour découvrir les nouveautés et offres en avant-première.</p>
+      <form id="newsletter-form"><label class="sr-only" for="email">Votre adresse e-mail</label><input id="email" type="email" placeholder="Votre adresse e-mail" required><button type="submit">Je m’inscris →</button></form>
+      <small id="newsletter-message"></small>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand"><a class="brand brand-light" href="#top">GLAMOVA<span>PARIS</span></a><p>La mode qui vous ressemble.</p></div>
+    <div><h3>Boutique</h3><a href="#nouveautes">Nouveautés</a><a href="#boutique">Toutes les pièces</a><a href="#boutique">Nos catégories</a></div>
+    <div><h3>Aide</h3><a href="pages/livraison.html">Livraison & retours</a><a href="pages/cgv.html">CGV</a><a href="pages/confidentialite.html">Confidentialité</a><a data-whatsapp href="#">Nous contacter</a></div>
+    <div><h3>Suivez-nous</h3><a data-social="instagram" href="#">Instagram ↗</a><a data-social="tiktok" href="#">TikTok ↗</a><a data-whatsapp href="#">WhatsApp ↗</a></div>
+    <p class="copyright">© <span id="year"></span> Glamova. Tous droits réservés.</p>
+  </footer>
+
+  <div class="search-panel" aria-hidden="true">
+    <button class="close-search" aria-label="Fermer">×</button><label for="search-input">Que recherchez-vous ?</label>
+    <input id="search-input" type="search" placeholder="Robe, blazer, pantalon…"><div id="search-results"></div>
+  </div>
+  <div class="overlay search-overlay"></div>
+
+  <aside class="cart-drawer" aria-hidden="true">
+    <div class="cart-header"><h2>Votre panier</h2><button class="close-cart" aria-label="Fermer">×</button></div>
+    <div class="shipping-progress"><p id="shipping-copy">Plus que 80,00 € pour profiter de la livraison offerte</p><div><span id="shipping-bar"></span></div></div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-empty" id="cart-empty"><span>♡</span><p>Votre panier est encore vide.</p><button class="secondary-button close-cart">Découvrir la collection</button></div>
+    <div class="cart-footer" id="cart-footer" hidden><div><span>Sous-total</span><strong id="cart-total">0,00 €</strong></div><small>Livraison calculée à l’étape suivante.</small><button class="checkout-button" id="checkout-button">Payer en toute sécurité →</button><p class="checkout-error" id="checkout-error"></p></div>
+  </aside>
+  <div class="overlay cart-overlay"></div>
+
+  <div class="product-modal" id="product-modal" aria-hidden="true"><div class="modal-content"></div></div>
+  <a class="whatsapp-float" data-whatsapp href="#" aria-label="Contacter Glamova sur WhatsApp">WhatsApp</a>
+  <div class="toast" id="toast" role="status"></div>
+</body>
+</html>
