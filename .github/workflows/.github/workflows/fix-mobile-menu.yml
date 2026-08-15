@@ -1,0 +1,56 @@
+name: Corriger le menu mobile
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/fix-mobile-menu.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  correction:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Corriger les boutons
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          app = Path("assets/app.js")
+          code = app.read_text()
+
+          menu_line = "  $('#menu-categories').innerHTML=categories.map(c=>`<button data-category=\"${c.name}\">${c.name}</button>`).join('');"
+          direct_click = "  $$('#menu-categories [data-category]').forEach(button=>{button.onclick=e=>{e.stopPropagation();selectCategory(button.dataset.category)}});"
+
+          if direct_click not in code:
+              code = code.replace(menu_line, menu_line + "\n" + direct_click)
+
+          marker = "function applySettings()"
+          helper = "function selectCategory(name){state.filter=name;renderFilters();renderProducts();closeAll();setTimeout(()=>$('#nouveautes').scrollIntoView({behavior:'smooth',block:'start'}),50)}\n"
+
+          if "function selectCategory(name)" not in code:
+              code = code.replace(marker, helper + marker)
+
+          old = "const cat=e.target.closest('[data-category]');if(cat){state.filter=cat.dataset.category;renderFilters();renderProducts();closeAll();setTimeout(()=>$('#nouveautes').scrollIntoView({behavior:'smooth'}),50)}"
+          new = "const cat=e.target.closest('[data-category]');if(cat)selectCategory(cat.dataset.category)"
+          code = code.replace(old, new)
+          app.write_text(code)
+
+          page = Path("index.html")
+          html = page.read_text()
+          html = html.replace('assets/app.js"></script>', 'assets/app.js?v=3"></script>')
+          page.write_text(html)
+          PY
+
+      - name: Enregistrer
+        run: |
+          git config user.name "Glamova Bot"
+          git config user.email "actions@github.com"
+          git add assets/app.js index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Réparer le menu catégories sur mobile"
+          git push
