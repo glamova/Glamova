@@ -9,21 +9,21 @@
   "products": [
     {
       "price": 25,
-      "name": "Sac Alma ",
+      "name": "Sac Alma Blanc",
       "featured": false,
       "sizes": [
         "Taille unique "
       ],
       "stripePriceId": "price_1U4aSg4Y8Uf9F3mtObns48cg",
-      "id": "sac-alma Blanc",
+      "id": "sac-alma-Blanc",
       "image": "/uploads/sac-alma-ivoire.jpg",
       "description": "Sac à main structuré au design élégant, doté d’une poignée et d’une bandoulière amovible pour un porté main ou épaule. Son fermoir doré et sa finition texturée apportent une touche chic à toutes vos tenues. ",
       "category": "Sacs"
     },
     {
       "featured": true,
-      "id": "Sac-alma Noir",
-      "name": "Sac Alma ",
+      "id": "Sac-alma-Noir",
+      "name": "Sac Alma Noir",
       "category": "Sacs",
       "price": 25,
       "description": "Sac à main structuré au design élégant, doté d’une poignée et d’une bandoulière amovible pour un porté main ou épaule. Son fermoir doré et sa finition texturée apportent une touche chic à toutes vos tenues.",
@@ -34,8 +34,8 @@
     },
     {
       "featured": true,
-      "id": "Sac-Alma Beige ",
-      "name": "Sac alma",
+      "id": "Sac-Alma-Beige ",
+      "name": "Sac alma Beige",
       "category": "Sacs",
       "price": 25,
       "description": "Sac à main structuré au design élégant, doté d’une poignée et d’une bandoulière amovible pour un porté main ou épaule. Son fermoir doré et sa finition texturée apportent une touche chic à toutes vos tenues.",
