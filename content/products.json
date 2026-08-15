@@ -10,7 +10,7 @@
     {
       "price": 25,
       "name": "Sac Alma ",
-      "featured": true,
+      "featured": false,
       "sizes": [
         "Taille unique "
       ],
@@ -19,6 +19,18 @@
       "image": "/uploads/sac-alma-ivoire.jpg",
       "description": "Sac à main structuré au design élégant, doté d’une poignée et d’une bandoulière amovible pour un porté main ou épaule. Son fermoir doré et sa finition texturée apportent une touche chic à toutes vos tenues. ",
       "category": "Sacs"
+    },
+    {
+      "featured": true,
+      "id": "Sac-alma",
+      "name": "Sac Alma",
+      "category": "Sacs",
+      "price": 25,
+      "description": "Sac à main structuré au design élégant, doté d’une poignée et d’une bandoulière amovible pour un porté main ou épaule. Son fermoir doré et sa finition texturée apportent une touche chic à toutes vos tenues.",
+      "sizes": [
+        "Taille unique"
+      ],
+      "image": "/uploads/3d0d6e0b-132a-4476-8831-694970cf9c0e.png"
     }
   ]
 }
