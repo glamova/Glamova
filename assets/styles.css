@@ -24,7 +24,7 @@
 .categories-toggle{display:flex;justify-content:space-between;align-items:center;width:100%}.categories-toggle span{font-size:30px;transition:.2s}.categories-toggle[aria-expanded="true"] span{transform:rotate(180deg)}
 .menu-categories{display:grid;grid-template-columns:1fr 1fr;max-height:0;overflow:hidden;transition:max-height .3s;border-bottom:0 solid #171513}
 .menu-categories.open{max-height:360px;border-bottom-width:2px;padding-bottom:18px}
-.menu-categories button{border:0;background:none;text-align:left;padding:7px 0;color:#5e554d;cursor:pointer}
+.menu-categories button,.menu-categories a{border:0;background:none;text-align:left;padding:7px 0;color:#5e554d;cursor:pointer}
 .drawer-tools{border-top:3px solid #171513;margin-top:18px;padding-top:24px;display:flex;flex-direction:column;gap:22px;font-size:18px}
 .drawer-tools button{border:0;background:none;padding:0;text-align:left;cursor:pointer}
 
