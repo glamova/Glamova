@@ -1,0 +1,38 @@
+name: Corriger les catégories
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/fix-categories.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  correction:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fermer le menu après le clic
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("assets/app.js")
+          s = p.read_text()
+          old = "const cat=e.target.closest('[data-category]');if(cat){state.filter=cat.dataset.category;renderFilters();renderProducts();$('#nouveautes').scrollIntoView()}"
+          new = "const cat=e.target.closest('[data-category]');if(cat){state.filter=cat.dataset.category;renderFilters();renderProducts();closeAll();setTimeout(()=>$('#nouveautes').scrollIntoView({behavior:'smooth'}),50)}"
+          if old not in s:
+              raise SystemExit("Texte à corriger introuvable")
+          p.write_text(s.replace(old, new))
+          PY
+
+      - name: Enregistrer la correction
+        run: |
+          git config user.name "Glamova Bot"
+          git config user.email "actions@github.com"
+          git add assets/app.js
+          git diff --cached --quiet && exit 0
+          git commit -m "Corriger les clics sur les catégories"
+          git push
