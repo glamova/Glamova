@@ -1,0 +1,43 @@
+name: Installer le site Glamova
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "Glamova-mise-a-jour.zip"
+      - ".github/workflows/install-site.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  installer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extraire le site
+        run: |
+          rm -rf /tmp/glamova-site
+          mkdir -p /tmp/glamova-site
+          unzip -q "Glamova-mise-a-jour.zip" -d /tmp/glamova-site
+          INDEX=$(find /tmp/glamova-site -name index.html -not -path "*/admin/*" | head -n 1)
+          test -n "$INDEX"
+          SRC=$(dirname "$INDEX")
+
+          for item in index.html success.html package.json netlify.toml README.md admin assets pages netlify
+          do
+            if [ -e "$SRC/$item" ]; then
+              rm -rf "$item"
+              cp -R "$SRC/$item" "$item"
+            fi
+          done
+
+      - name: Publier les fichiers
+        run: |
+          git config user.name "Glamova Bot"
+          git config user.email "actions@github.com"
+          git add index.html success.html package.json netlify.toml README.md admin assets pages netlify
+          git diff --cached --quiet && exit 0
+          git commit -m "Installer les fichiers du site Glamova"
+          git push
